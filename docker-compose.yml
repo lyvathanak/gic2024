@@ -1,4 +1,4 @@
-version: '3.8'
+
 services:
   app:
     build: .
@@ -11,7 +11,7 @@ services:
       - laravel
   webserver:
     image: nginx:latest
-    container_name: nginx_server
+    container_name: nginx_server_test
     ports:
       - "8100:80"
     volumes:
@@ -21,9 +21,9 @@ services:
       - laravel
   db:
     image: mysql:8.0
-    container_name: mysql_db
+    container_name: mysql_db_test
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
