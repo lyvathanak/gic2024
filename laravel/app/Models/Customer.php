@@ -6,15 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Customer extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'price', 'description', 'category_id', 'images'];
+    protected $fillable = [
+        'name',
+        'email',
+        'address',
+        'phone',
+    ];
 
-    public function category()
+    public function orders()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Order::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function carts()
@@ -25,10 +35,5 @@ class Product extends Model
     public function wishlists()
     {
         return $this->hasMany(Wishlist::class);
-    }
-
-    public function orderProducts()
-    {
-        return $this->hasMany(OrderProduct::class);
     }
 }
